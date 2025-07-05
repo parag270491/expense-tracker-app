@@ -42,3 +42,9 @@ def fetch_all_transactions() -> pd.DataFrame:
     df = pd.read_sql_query("SELECT * FROM transactions", conn)
     conn.close()
     return df
+
+def clear_transactions():
+    conn = create_connection()
+    conn.execute("DELETE FROM transactions")
+    conn.commit()
+    conn.close()

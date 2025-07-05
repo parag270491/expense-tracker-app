@@ -2,12 +2,18 @@ import streamlit as st
 import pandas as pd
 from parser import process_pdf_files
 from visualize import visualize_category_spending
-from database import create_table, insert_transactions, fetch_all_transactions
+from database import create_table, insert_transactions, fetch_all_transactions, clear_transactions
 
 def main():
     st.title("Expense Tracker")
 
-    create_table()  # ensure DB table exists
+    with st.expander("⚠️ Reset All Data Options"):
+        if st.checkbox("I want to reset all stored data"):
+            if st.button("🔄 Reset Now"):
+                st.session_state.pop('final_df', None)
+                clear_transactions()
+                st.success("All data has been reset. Please upload new files.")
+                return  # stop further execution after reset
 
 
     uploaded_files = st.file_uploader(
