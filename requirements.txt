@@ -1,4 +1,6 @@
+streamlit
 pandas
 pdfplumber
-matplotlib
 google-generativeai
+matplotlib
+seaborn
